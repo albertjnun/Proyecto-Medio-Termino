@@ -1,8 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package proyecto;
 
 import java.util.Calendar;
+import java.util.Scanner;
 
+/**
+ *
+ * @author alber
+ */
 public class Empleado {
+    
+    Scanner sc= new Scanner(System.in);
 
 	public String Nombre,
 				  ApellidoMaterno,
@@ -12,10 +24,50 @@ public class Empleado {
 				  Departamento,
 				  Puesto;
 	
-	public Calendar Fecha;
+	public Calendar Fecha = new Calendar() {
+            @Override
+            protected void computeTime() {
+                //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            protected void computeFields() {
+                 //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void add(int i, int i1) {
+                 //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void roll(int i, boolean bln) {
+                //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getMinimum(int i) {
+                return 0;//To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getMaximum(int i) {
+                return 0; //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getGreatestMinimum(int i) {
+                return 0;//To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public int getLeastMaximum(int i) {
+                return 0;//To change body of generated methods, choose Tools | Templates.
+            }
+        };
 	public int SueldoBruto;
-	
-	Empleado (String nombre,String apellidop,String apellidom,String direccion,String rfc,int departamento,
+                                       	
+	public Empleado (String nombre,String apellidop,String apellidom,String direccion,String rfc,int departamento,
 			  String puesto,int anio,int mes, int dia, int sueldo){
 		setNombre(nombre);
 		setApellidoPaterno(apellidop);
@@ -26,6 +78,7 @@ public class Empleado {
 		setPuesto(puesto);
 		setSueldoBruto(sueldo);
 		setRFC(rfc);
+                
 	}
 	
 	public void setNombre(String a) {
@@ -70,43 +123,48 @@ public class Empleado {
 		}
 		char l3 = this.ApellidoMaterno.charAt(0);
 		char l4 = this.Nombre.charAt(0);
-		char l5 = Integer.toString(this.Fecha.YEAR).charAt(2);
-		char l6 = Integer.toString(this.Fecha.YEAR).charAt(3);
+		char l5 = Integer.toString(this.Fecha.get(1)).charAt(2);
+		char l6 = Integer.toString(this.Fecha.get(1)).charAt(3);
 		if (this.Fecha.MONTH + 1 < 10) {
 			 l7 = '0';
-			 l8 = Integer.toString(this.Fecha.MONTH).charAt(0);
+			 l8 = Integer.toString(this.Fecha.get(2)).charAt(0);
 		}
 		else {
-			 l7 = Integer.toString(this.Fecha.MONTH).charAt(0);
-			 l8 = Integer.toString(this.Fecha.MONTH).charAt(1);
+			 l7 = Integer.toString(this.Fecha.get(2)).charAt(0);
+			 l8 = Integer.toString(this.Fecha.get(2)).charAt(1);
 		}
-		if (this.Fecha.DAY_OF_MONTH < 10) {
+		if (this.Fecha.get(5) < 10) {
 			 l9 = '0';
-			 l10 = Integer.toString(this.Fecha.DAY_OF_MONTH).charAt(0);
+			 l10 = Integer.toString(this.Fecha.get(5)).charAt(0);
 		}
 		else {
-			 l9 = Integer.toString(this.Fecha.DAY_OF_MONTH).charAt(0);
-			 l10 = Integer.toString(this.Fecha.DAY_OF_MONTH).charAt(1);
+			 l9 = Integer.toString(this.Fecha.get(5)).charAt(0);
+			 l10 = Integer.toString(this.Fecha.get(5)).charAt(1);
 		}
 			
-		char [] RFC = a.substring(0,9).toCharArray();
+		char [] RFC = a.toCharArray();
 		if (RFC [0] == l1 && RFC [1] == l2 && RFC [2] == l3 && RFC [3] == l4 && RFC [4] == l5
 			&& RFC [5] == l6 && RFC [6] == l7 && RFC [7] == l8 && RFC [8] == l9 && RFC [9] == l10) {
 			this.RFC = a;
 		}
 		else {
 			System.out.println("El RFC es incorrecto.");
+                        System.out.println("Vuelve a introducir el RFC. ");
+                        String rfc=sc.nextLine().toUpperCase();
+                        setRFC(rfc);
 		}
+                
+                this.RFC=a;
 	}
 	public void setDepartamento(int a) {
 		switch (a) {
-		case 1:
+                    case 1:
 			this.Departamento = "Recursos Humanos";
 			break;
-		case 2:
+                    case 2:
 			this.Departamento = "Compras";
 			break;
-		case 3:
+                    case 3:
 			this.Departamento = "Inventario";
 			break;
 		}
@@ -121,6 +179,7 @@ public class Empleado {
 	public void setFecha(int a,int b, int c) {
 		this.Fecha.set(a, b, c);
 	}
+        
 	public String getRFC() {
 		return this.RFC;
 	}
@@ -148,4 +207,7 @@ public class Empleado {
 	public int getSueldoBruto() {
 		return SueldoBruto;
 	}
+                
 }
+    
+
